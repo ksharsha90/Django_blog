@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.urls import reverse
+
 class Post(models.Model): #creating subclass of models.Model called Post,using this subclass functionality we have access to everything within django.models.Model
 	title = models.CharField(max_length = 200)
 	author = models.ForeignKey( #For author, we use many-one relationship
@@ -10,3 +12,6 @@ class Post(models.Model): #creating subclass of models.Model called Post,using t
 
 	def __str__(self):
 		return self.title
+
+	def get_absolute_url(self):
+		return reverse('post_detail', args=[str(self.id)])
